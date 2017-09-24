@@ -56,11 +56,11 @@ class FillController extends Controller
 
             
             $fields = 'created_at, updated_at,';
-            $values = date('Y-m-d H:i:s').', '.date('Y-m-d H:i:s').',';
+            $values = '"'.date('Y-m-d H:i:s').'", "'.date('Y-m-d H:i:s').'",';
             $query = '';
             $i = 0;
             foreach($request->fill as $key => $value){
-                $values = $values.' '.$value.', ';
+                $values = $values.' "'.$value.'", ';
                 $fields = $fields.' '.$key.', ';
             }
 
