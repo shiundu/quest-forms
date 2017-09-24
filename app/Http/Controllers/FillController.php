@@ -53,7 +53,7 @@ class FillController extends Controller
             $fields = rtrim($fields, ', ');
             $values = rtrim($values, ', ');
 
-            $s = DB::insert(DB::raw('INSERT INTO `'.$request->table_name.'` ('.$fields.') VALUES ('.$values.')'));
+            $s = DB::insert(DB::raw('INSERT INTO '.$request->table_name.' ('.$fields.') VALUES ('.$values.')'));
 
             //print_r($s);
             if($s){
