@@ -40,13 +40,27 @@ class FillController extends Controller
     public function store(Request $request)
     {
         try{
+            // $fields = '`created_at`, `updated_at`,';
+            // $values = '"'.date('Y-m-d H:i:s').'", "'.date('Y-m-d H:i:s').'",';
+            // $query = '';
+            // $i = 0;
+            // foreach($request->fill as $key => $value){
+            //     $values = $values.' "'.$value.'", ';
+            //     $fields = $fields.' '.'`'.$key.'`, ';
+            // }
+
+            // $fields = rtrim($fields, ', ');
+            // $values = rtrim($values, ', ');
+
+            // $s = DB::insert(DB::raw('INSERT INTO `'.$request->table_name.'` ('.$fields.') VALUES ('.$values.')'));
+
             
             $fields = 'created_at, updated_at,';
-            $values = '"'.date('Y-m-d H:i:s').'", "'.date('Y-m-d H:i:s').'",';
+            $values = date('Y-m-d H:i:s').', '.date('Y-m-d H:i:s').',';
             $query = '';
             $i = 0;
             foreach($request->fill as $key => $value){
-                $values = $values.' "'.$value.'", ';
+                $values = $values.' '.$value.', ';
                 $fields = $fields.' '.$key.', ';
             }
 
