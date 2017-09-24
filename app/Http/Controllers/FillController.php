@@ -41,13 +41,13 @@ class FillController extends Controller
     {
         try{
             
-            $fields = '`created_at`, `updated_at`,';
+            $fields = 'created_at, updated_at,';
             $values = '"'.date('Y-m-d H:i:s').'", "'.date('Y-m-d H:i:s').'",';
             $query = '';
             $i = 0;
             foreach($request->fill as $key => $value){
                 $values = $values.' "'.$value.'", ';
-                $fields = $fields.' '.'`'.$key.'`, ';
+                $fields = $fields.' '.$key.', ';
             }
 
             $fields = rtrim($fields, ', ');

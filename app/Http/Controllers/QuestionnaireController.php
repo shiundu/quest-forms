@@ -59,7 +59,6 @@ class QuestionnaireController extends Controller
                   }
                 }
 
-                echo $time;
                 return $this->index();
               }
               else {
