@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\QuestionnaireModel;
 use DB;
+use Request as Req;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use App\Http\Controllers\Controller;
@@ -28,19 +29,39 @@ class FillController extends Controller
     public function show($id)
     {
         $questions = DB::getSchemaBuilder()->getColumnListing($id);
-
-        return view('questionnaire.fill', ['question' => $questions]);
+        foreach($questions as $key => $value){
+            if($key == 3){
+               $title = $value; 
+            }   
+        }
+        return view('questionnaire.fill', ['question' => $questions, 'title' => $title]);
     }
 
     public function store(Request $request)
     {
-
-        $time = 'q_'.time();
         try{
-            $QuestionnaireModel = new QuestionnaireModel;
+            
+            $fields = '`created_at`, `updated_at`,';
+            $values = '"'.date('Y-m-d H:i:s').'", "'.date('Y-m-d H:i:s').'",';
+            $query = '';
+            $i = 0;
+            foreach($request->fill as $key => $value){
+                $values = $values.' "'.$value.'", ';
+                $fields = $fields.' '.'`'.$key.'`, ';
+            }
 
-            $QuestionnaireModel->table_name = $time;
-            $x = $QuestionnaireModel->save();
+            $fields = rtrim($fields, ', ');
+            $values = rtrim($values, ', ');
+
+            $s = DB::insert(DB::raw('INSERT INTO `'.$request->table_name.'` ('.$fields.') VALUES ('.$values.')'));
+
+            //print_r($s);
+            if($s){
+                return view('saved');
+            }
+            else {
+                return view('error_saving');
+            }
 
         }
         catch(\Exception $e){

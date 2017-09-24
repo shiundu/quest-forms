@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>Gentelella Alela! | </title>
+    <title>Thomas inc! | </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -38,20 +38,20 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Thomas inc!</span></a>
             </div>
 
             <div class="clearfix"></div>
 
             <!-- menu profile quick info -->
             <div class="profile clearfix">
-              <div class="profile_pic">
+              <!-- <div class="profile_pic">
                 <img src="images/img.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
                 <h2>John Doe</h2>
-              </div>
+              </div> -->
             </div>
             <!-- /menu profile quick info -->
 
@@ -64,9 +64,8 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.html">Dashboard</a></li>
-                      <li><a href="index2.html">Dashboard2</a></li>
-                      <li><a href="index3.html">Dashboard3</a></li>
+                      <li><a href="<?php echo url('/'); ?>"">View All</a></li>
+                      <li><a href="<?php echo url('/questionnaire/create'); ?>">Create questionnaire</a></li>
                     </ul>
                   </li>
                   <!-- <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
@@ -283,7 +282,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            Thomas inc! <a href=""></a>
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -326,6 +325,29 @@
     <script src="../vendors/starrr/dist/starrr.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../js/custom.min.js"></script>
-  
+    <script>
+    // $( "#create_form_button" ).click(function() {
+    //   $( "#create_form" ).append( "<strong>Hello</strong>" );
+    // });
+    
+    $(document).ready(function() {
+        var max_fields      = 10; //maximum input boxes allowed
+        var wrapper         = $("#create_form"); //Fields wrapper
+        var add_button      = $("#create_form_button"); //Add button ID
+        
+        var x = 1; //initlal text box count
+        $(add_button).click(function(e){ //on add input button click
+            e.preventDefault();
+            if(x < max_fields){ //max input box allowed
+                x++; //text box increment
+                $(wrapper).append('<div class="form-group"><label></label><input type="text" name="form_text[]" class="form-control"/><a href="#" class="remove_field">X</a></div>'); //add input box
+            }
+        });
+        
+        $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+            e.preventDefault(); $(this).parent('div').remove(); x--;
+        })
+    });
+    </script>
   </body>
 </html>

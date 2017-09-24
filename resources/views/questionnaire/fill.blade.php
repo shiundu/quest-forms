@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.fill')
 
 @section('title', 'Page Title')
 
@@ -6,30 +6,14 @@
 @section('content')
 <!-- page content -->
 
-<div class="right_col" role="main">
+<div class="" role="main">
   <div class="">
-    <div class="page-title">
-      <div class="title_left">
-        <h3>Form Elements</h3>
-      </div>
-
-      <div class="title_right">
-        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for...">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">Go!</button>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="clearfix"></div>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Form Design <small>different form elements</small></h2>
+            <h2>Thomas  Inc<small></small></h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -49,7 +33,7 @@
           </div>
           <div class="x_content">
             <br />
-            <h1>Create questionnaire</h1>
+            <h1>{!! $title !!}</h1>
 
             <ul>
               @foreach($errors->all() as $error)
@@ -57,18 +41,36 @@
               @endforeach
             </ul>
 
-            {!! Form::open(array('route' => 'questionnaire.store', 'class' => 'form')) !!}
-            @foreach($question as $q)
+            {!! Form::open(array('route' => 'fill.store', 'class' => 'form')) !!}
+            
               <div class="form-group">
-                {!! Form::label($q) !!}
-                {!! Form::text('q[title]', null,
+                {!! Form::hidden('table_name', Request::segment(2),
                     array('required',
-                          'class'=>'form-control',
-                          'placeholder'=>'Title')) !!}
-                <li>{{$q}}<li>
+                          'class'=>'form-control')) !!}
               </div>
-
+              @foreach($question as $key => $q)
+                @if($key == 3)
+                  <div class="form-group">
+                    {!! Form::hidden('fill['.$q.']', $q,
+                        array('required',
+                              'class'=>'form-control',
+                              'placeholder'=>$q)) !!}
+                  </div>
+                @endif
+                @if($key > 3)
+                  <div class="form-group">
+                    {!! Form::label($q) !!}
+                    {!! Form::text('fill['.$q.']', null,
+                        array('required',
+                              'class'=>'form-control',
+                              'placeholder'=>$q)) !!}
+                  </div>
+                @endif
               @endforeach
+              <div class="form-group">
+                {!! Form::submit('Save!', 
+                  array('class'=>'btn btn-primary')) !!}
+              </div>
             {!! Form::close() !!}
           </div>
         </div>

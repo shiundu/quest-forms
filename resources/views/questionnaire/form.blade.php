@@ -8,7 +8,7 @@
 
 <div class="right_col" role="main">
   <div class="">
-    <div class="page-title">
+    <!-- <div class="page-title">
       <div class="title_left">
         <h3>Form Elements</h3>
       </div>
@@ -23,12 +23,12 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="clearfix"></div>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
-          <div class="x_title">
+          <!-- <div class="x_title">
             <h2>Form Design <small>different form elements</small></h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -46,8 +46,8 @@
               </li>
             </ul>
             <div class="clearfix"></div>
-          </div>
-          <div class="x_content">
+          </div> -->
+          <div class="x_content" >
             <br />
             <h1>Create questionnaire</h1>
 
@@ -58,31 +58,19 @@
             </ul>
 
             {!! Form::open(array('route' => 'questionnaire.store', 'class' => 'form')) !!}
-
-            <div class="form-group">
-              {!! Form::label('Title') !!}
-              {!! Form::text('q[title]', null, 
-                  array('required', 
-                        'class'=>'form-control', 
-                        'placeholder'=>'Title')) !!}
+            <div id="create_form">
+              <div class="form-group">
+                {!! Form::label('Title') !!}
+                {!! Form::text('form_text[]', null, 
+                    array('required', 
+                          'class'=>'form-control', 
+                          'placeholder'=>'Title')) !!}
+              </div>
             </div>
-
             <div class="form-group">
-              {!! Form::label('Question 1') !!}
-              {!! Form::text('q[q1]', null, 
-                  array('required', 
-                        'class'=>'form-control', 
-                        'placeholder'=>'Question 1')) !!}
-            </div>
-
-            <div class="form-group">
-              {!! Form::label('Question 2') !!}
-              {!! Form::text('q[q2]', null, 
-                  array('required', 
-                        'class'=>'form-control', 
-                        'placeholder'=>'Question 3')) !!}
-            </div>
-
+                {!! Form::label('Add new field!', null,
+                  array('class'=>'btn btn-info', 'id'=>'create_form_button')) !!}
+              </div>
             <div class="form-group">
               {!! Form::submit('Save!', 
                 array('class'=>'btn btn-primary')) !!}

@@ -21,8 +21,10 @@ class QuestionnaireController extends Controller
      */
     public function index()
     {
-        // return view('user.profile', ['user' => User::findOrFail($id)]);
-        return view('questionnaire.form');
+        // $questions = DB::getSchemaBuilder()->getColumnListing($id);
+        $tables = QuestionnaireModel::all();
+
+        return view('welcome', ['tables' => $tables]);
     }
 
     public function show()
@@ -31,9 +33,15 @@ class QuestionnaireController extends Controller
         return view('questionnaire.form');
     }
 
+    public function create(){
+
+      return view('questionnaire.form');
+
+    }
+
     public function store(Request $request)
     {
-
+        // print_r($request->form_text);
         $time = 'q_'.time();
         try{
             $QuestionnaireModel = new QuestionnaireModel;
@@ -42,7 +50,7 @@ class QuestionnaireController extends Controller
             $x = $QuestionnaireModel->save();
             if($x){
               if($this->create_table($time)){
-                foreach ($request->q as $key => $value) {
+                foreach ($request->form_text as $key => $value) {
                   try{
                     $this->createColumn($time, $value);
                   }
@@ -52,6 +60,7 @@ class QuestionnaireController extends Controller
                 }
 
                 echo $time;
+                return $this->index();
               }
               else {
                   echo 'Error saving table_';

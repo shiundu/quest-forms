@@ -12,13 +12,13 @@
 */
 // Route::resource('assessment', 'AssessmentController');
  // (index, edit, update, create, etc.)
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', 'QuestionnaireController');
 
 Route::get('/prod', function () {
     return view('form');
 });
+
+Route::get('/', 'QuestionnaireController@index');
 
 Route::resource('/questionnaire', 'QuestionnaireController');
 
