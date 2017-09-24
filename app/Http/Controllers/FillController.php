@@ -55,7 +55,7 @@ class FillController extends Controller
             // $s = DB::insert(DB::raw('INSERT INTO `'.$request->table_name.'` ('.$fields.') VALUES ('.$values.')'));
 
             
-            $fields = 'created_at, updated_at,';
+            $fields = 'created_at, updated_at, ';
             $values = '"'.date('Y-m-d H:i:s').'", "'.date('Y-m-d H:i:s').'",';
             $query = '';
             $i = 0;
@@ -65,7 +65,7 @@ class FillController extends Controller
             }
 
             $fields = strtolower(rtrim($fields, ', '));
-            $values = strtoupper(rtrim($values, ', '));
+            $values = rtrim($values, ', ');
 
             $s = DB::insert(DB::raw('INSERT INTO '.$request->table_name.' ('.$fields.') VALUES ('.$values.')'));
 
